@@ -1,0 +1,51 @@
+.littleBookItem{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 13rem;
+  height: 25rem;
+  /* background-color: aquamarine; */
+  font-size: var(--font-size-text-description);
+  gap: .5rem;
+  font-family: 'Caveat', cursive;
+  z-index: 1;
+}
+
+.littleBookItem__img{
+  cursor: pointer;
+  position: relative;
+  /* width: 8rem;
+  height: 12rem; */
+  width: 9.5rem;
+  height: 14.3rem;
+  box-shadow: 0 0 9px 2px black;
+  transition: .25s;
+  z-index: 1;
+}
+.littleBookItem__img:hover{
+  transform: translateY(.4rem);
+}
+.littleBookItem__img img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.littleBookItem__cathegory{
+  text-align: center;
+  color: var(--secondColorFont);
+  
+}
+.littleBookItem__title{
+  text-align: center;
+  color:var(--basicColorFont);
+  
+}
+.littleBookItem__auittleBookItem_thors{
+  text-align: center;
+  color: var(--secondColorFont);
+  text-decoration: underline;
+}

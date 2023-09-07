@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useLayoutEffect, useEffect } from 'react';
+import './normolize.css'
 import './App.css';
+import SearchFields from "./components/UI/searchFields/SearchFields"
+import BookFields from './components/UI/bookFields/BookFields';
+import {useActions} from "./redux/reduxHooks"
+import { useSelector } from 'react-redux';
+import { selectBook } from "./redux/slices/bookSlice"
+import { checkClosestParant } from "./components/utilits/utilits"
+import { useClosePopUpByScroll } from "./components/customHooks/customHooks"
 
-function App() {
+
+const App: React.FC = () => {
+  const { closePopUpFilter: dispatch} = useActions()
+  const { exceptClassNames: list } = useSelector(selectBook)
+
+  useClosePopUpByScroll()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className="App"
+      onClick={(event) => {
+        checkClosestParant(event, list, dispatch)
+      }}
+
+    >
+      <div className='App__fixedPositionField'>
+        <SearchFields />
+      </div>
+      <BookFields/>
     </div>
   );
 }

@@ -1,0 +1,7 @@
+.BookFields{
+  margin-top: calc(var(--margin_top_item) + 1rem) ;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* gap: .5rem */
+}

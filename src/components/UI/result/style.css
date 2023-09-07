@@ -1,0 +1,19 @@
+.searchField__text{
+  font-size: var(--font-size-text-button);
+  color: var(--secondColorFont);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem
+}
+.searchField__info-result{
+  color: var(--basicColorFont);
+}
+.searchField__text span{
+  
+}
+
+@media (max-width: 600px){
+  .searchField__text{
+    flex-direction: column;
+  }
+}

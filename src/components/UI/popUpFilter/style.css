@@ -1,0 +1,43 @@
+.popUpFilter{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--heigh-item-serch);
+  background-color: var(--main-bg);
+  /* border: 1px solid rgb(108, 85, 24); */
+  box-shadow: inset 0 0 5px 2px rgb(141, 131, 131);;
+  z-index: 1;
+  transition-timing-function: linear;
+  text-align: center;
+  color: var( --secondColorFont);
+  line-height:  var(--heigh-item-serch);
+  font-size: var(--font-size-text-button);
+  transition: .25s;
+  cursor: pointer;
+}
+
+.popUpFilter:hover{
+  color: wheat;
+}
+.popUpFilter::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: var(--secondColorActive);
+  z-index: -1;
+  transition: .25s;
+}
+.popUpFilter:hover::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondColorActive);
+  z-index: -1;
+}

@@ -1,0 +1,16 @@
+.searchFields{
+  position: absolute;
+  width: 100%;
+  max-width: var(--width-items-search);
+  bottom: 1rem;
+  left: 50%;
+  padding: 0 var(--padding-item);
+  transform: translate(-50%);
+}
+.searchFields__container{
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-around;
+}

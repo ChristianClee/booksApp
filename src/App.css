@@ -1,38 +1,49 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap');
+:root{
+  --margin_top_item: 15rem; /* для позиционирования верхнего отступа App__fixedPositionField и BookFields */ 
+  --main-bg: rgb(214, 205, 205); /* главный цвет background*/
+  --padding-item: 1rem; /*боковые отступы для App__fixedPositionField и все отступы для остального приложения */
+  --heigh-item-serch: 3rem; /* высота элементов в SearchFields */
+  --width-items-search: 60rem; /* ширина блока SearchFields */
+  --font-size-text-button: 1.5rem;
+  --font-size-text-description: 1.3rem;
+
+  --firstColor: rgb(201, 192, 164);
+  --secondColor: rgb(211, 169, 53);
+  /* --secondColorActive: rgb(145, 160, 106); */
+  --secondColorActive: rgb(143, 148, 131);
+
+  --basicColorFont: rgb(32, 35, 34);
+  --firstColorFont: rgb(41, 16, 16);
+  --secondColorFont: rgb(139, 139, 139);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html{
+  font-size: 100%;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body{
+  
 }
+#root{
+  height: 100%;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
+.App{
+  min-height: 100%;
+  background-color: var(--main-bg);
+  max-width: 120rem; /*1920px;*/
+  margin: 0 auto;
+  padding:  var(--padding-item);
 
-.App-link {
-  color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App__fixedPositionField{
+  position: fixed;
+  width: 100%;
+  max-width: 120rem;
+  height: var(--margin_top_item);
+  top: 0rem;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: var(--main-bg);
+  z-index: 2;
 }
