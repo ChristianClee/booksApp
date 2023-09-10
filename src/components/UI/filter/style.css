@@ -26,6 +26,27 @@ background-color: var(--main-bg);
   background-color: var(--main-bg);
   z-index: 33;
 }
+.seasearchField__img{
+  position: absolute;
+  top: 50%;
+  right: 0; 
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: .25s;
+}
+.seasearchField__img.active{
+  transform: translateY(-50%) rotate(-90deg);
+}
+
+.seasearchField__img .ibg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  fill: var(--secondColorFont);
+}
 .searchField__filtering .animation{
   position: absolute;
   top: 0;
@@ -49,22 +70,7 @@ background-color: var(--main-bg);
   color: var(--basicColorFont);
 }
 
-/* .searchField__filtering:hover{
-  box-shadow: 0 0 5px 1px var(--secondColorActive);
-}
-.searchField__filtering:hover .animation{
-  transform: translate(0);
-}
-.searchField__filtering:hover .searchField__element{
-  color: var(--firstColorFont);
-}
 
-.searchField__filtering:active .searchField__element{
-  transform: translateY(-50%) scale(.9);  
-}
-.searchField__filtering:hover .seasearchField__img{
-    fill: var(--firstColorFont);
-} */
 
 .searchField__element{
   position: absolute;
@@ -75,15 +81,6 @@ background-color: var(--main-bg);
   transition: .25s;
   color: var(--secondColorFont);
 }
-.seasearchField__img{
-  fill: var(--secondColorFont);
-  position: absolute;
-  top: 50%;
-  right: 0; 
-  transform: translateY(-50%);
-  width: 1.5rem;
-  height: 1.5rem;
-  transition: .25s;
-}
+
 
 

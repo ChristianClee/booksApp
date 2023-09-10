@@ -1,44 +1,38 @@
-import React, { useState } from 'react';
-// import { useSelector } from "react-redux";
-// import { selectPopUp } from "../../../redux/slices/bookSlice"
+import React from 'react';
+import { getMargin, getDuration } from "../../utilits/utilits"
 import "./style.css"
+import type {listItemsT , itemT} from "../../../redux/types"
 
-const PopUpFilter: React.FC<{ category: string[], flag: boolean }> = ({ category, flag}) => {
+type PopUpFilterT = {
+  category: listItemsT;
+  flag: boolean;
+  item: itemT;
+  func: (arg: { name: string, value: string }) => void
+}
 
-
-  function getMargin(num: number): string {
-    let marginTop
-    if (flag) {
-      marginTop = `calc(-1 * var(--heigh-item-serch) * ${num} )`
-    } else {
-      marginTop = `0`
-    }
-    return marginTop
-  }
-
-  function getDuration(num: number, minDuration: number): string {
-    let duration = minDuration * num
-    return `${duration}s`
-  }
-
+const PopUpFilter: React.FC<PopUpFilterT> = ({ category, flag, item, func }) => {
   
+  const sortCathegory = category.filter(elem => elem.name !== item.name)
 
   return (
     <>
       {
-        category.map((item, index: number) => {
+        sortCathegory.map((elem, index: number) => {
           index += 1
           return (
             <div
               className='popUpFilter'
               key={index}
               style={{
-                bottom: getMargin(index),
+                bottom: getMargin(index, flag),
                 transitionDuration: getDuration(index, .07),
                 zIndex: `${index}`
               }}
+              onClick={(e) => {
+                func(elem)
+              }}
             >
-              {item}
+              {elem.name}
             </div>
           )
         })

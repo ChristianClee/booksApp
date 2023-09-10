@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect } from 'react';
+import React from 'react';
 import './normolize.css'
 import './App.css';
 import SearchFields from "./components/UI/searchFields/SearchFields"
@@ -15,6 +15,7 @@ const App: React.FC = () => {
   const { exceptClassNames: list } = useSelector(selectBook)
 
   useClosePopUpByScroll()
+
 
   return (
     <div

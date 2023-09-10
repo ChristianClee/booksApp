@@ -7,16 +7,21 @@
   --width-items-search: 60rem; /* ширина блока SearchFields */
   --font-size-text-button: 1.5rem;
   --font-size-text-description: 1.3rem;
+  --font-size-text-book: 1.5rem;
 
   --firstColor: rgb(201, 192, 164);
   --secondColor: rgb(211, 169, 53);
   /* --secondColorActive: rgb(145, 160, 106); */
   --secondColorActive: rgb(143, 148, 131);
 
-  --basicColorFont: rgb(32, 35, 34);
-  --firstColorFont: rgb(41, 16, 16);
+  --basicColorFont: rgb(46, 54, 51);
+  --firstColorFont: rgb(133, 64, 64); /* not using*/
   --secondColorFont: rgb(139, 139, 139);
+  --thirdColorFont: rgb(63, 94, 137); /* not using*/
+  --fourthColorFont: rgb(120, 113, 113); /* not using*/
+  
 }
+
 
 html{
   font-size: 100%;
@@ -30,12 +35,14 @@ body{
 }
 .App{
   min-height: 100%;
+  position: relative;
   background-color: var(--main-bg);
   max-width: 120rem; /*1920px;*/
   margin: 0 auto;
   padding:  var(--padding-item);
-
 }
+
+
 .App__fixedPositionField{
   position: fixed;
   width: 100%;
@@ -45,5 +52,26 @@ body{
   left: 50%;
   transform: translate(-50%);
   background-color: var(--main-bg);
-  z-index: 2;
+  z-index: 22;
+}
+
+@media(max-width: 1000px){
+  html{
+    font-size: 90%;
+  }
+}
+@media(max-width: 850px){
+  html{
+    font-size: 80%;
+  }
+}
+@media(max-width: 650px){
+  html{
+    font-size: 70%;
+  }
+}
+@media(max-width: 350px){
+  html{
+    font-size: 60%;
+  }
 }

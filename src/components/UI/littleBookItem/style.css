@@ -1,51 +1,111 @@
-.littleBookItem{
+.littleBookItem {
+  position: relative;
+  /* background-color: aqua; */
+  width: 13rem;
+  height: 27rem;
+  overflow: hidden;
+}
+.littleBookItem__box {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 13rem;
-  height: 25rem;
-  /* background-color: aquamarine; */
-  font-size: var(--font-size-text-description);
-  gap: .5rem;
-  font-family: 'Caveat', cursive;
+  width: 100%;
+  font-size: var(--font-size-text-book);
+  gap: 0.5rem;
+  font-family: "Caveat", cursive;
+  z-index: 1;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.littleBookItem__box:hover {
+  transform: translateY(-0.5rem);
+}
+.littleBookItem__box:hover .littleBookItem__img {
+  box-shadow: 0 0 7px 3px black;
+}
+
+.littleBookItem__img {
+  margin-top: 1.3rem;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  width: 8.4rem;
+  height: 12rem;
+  box-shadow: 0 0 4px 1px black;
+  transition: 0.25s;
   z-index: 1;
 }
 
-.littleBookItem__img{
-  cursor: pointer;
-  position: relative;
-  /* width: 8rem;
-  height: 12rem; */
-  width: 9.5rem;
-  height: 14.3rem;
-  box-shadow: 0 0 9px 2px black;
-  transition: .25s;
-  z-index: 1;
-}
-.littleBookItem__img:hover{
-  transform: translateY(.4rem);
-}
-.littleBookItem__img img{
+.littleBookItem__img img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
-.littleBookItem__cathegory{
-  text-align: center;
-  color: var(--secondColorFont);
-  
+.littleBookItem__noPhoto {
+  flex-shrink: 0;
+  width: 8.4rem;
+  height: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s;
 }
-.littleBookItem__title{
-  text-align: center;
-  color:var(--basicColorFont);
-  
+/* .littleBookItem__img:hover,
+.littleBookItem__noPhoto:hover {
+  transform: translateY(0.4rem);
+} */
+.littleBookItem__fakeFoto {
+  width: 100%;
+  height: 9rem;
 }
-.littleBookItem__auittleBookItem_thors{
+.littleBookItem__noPhoto h3 {
+  font-size: 1.9rem;
+  font-weight: 600;
+}
+
+.littleBookItem__cathegory {
   text-align: center;
-  color: var(--secondColorFont);
+  color: var(--firstColorFont);
+}
+.littleBookItem__title {
+  text-align: center;
+  color: var(--basicColorFont);
+  /* font-size: var(--font-size-text-book); */
+  font-size: 1.8rem;
+}
+.littleBookItem__auittleBookItem_thors {
+  text-align: center;
+  color: var(--thirdColorFont);
   text-decoration: underline;
+}
+.littleBookItem__noInfoText {
+  color: var(--fourthColorFont);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 1rem;
+}
+.littleBookItem__addition {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 2rem;
+  font-size: var(--font-size-text-description);
+  /* background-color: var(--main-bg); */
+  background-color: rgb(210, 213, 146);
+  text-align: center;
+  line-height: 2rem;
+  z-index: 2;
+}
+
+@media (max-width: 650px) {
+  .littleBookItem__img {
+    width: 9.5rem;
+    height: 13rem;
+  }
 }

@@ -7,6 +7,7 @@
 }
 .searchField__info-result{
   color: var(--basicColorFont);
+  /* font-size: 2rem; */
 }
 .searchField__text span{
   

@@ -7,27 +7,31 @@ import PopUpFilter from '../popUpFilter/PopUpFilter';
 import { useActions } from "../../../redux/reduxHooks"
 import { selectBook } from "../../../redux/slices/bookSlice"
 import { useSelector } from 'react-redux'
+import { filterItems, sortItems } from "../../../redux/viriabls"
 
 
 
 const SearchFields: React.FC = () => {
-  const { getFilterTuggle, getSortTuggle } = useActions()
-  const { filterState, sortState } = useSelector(selectBook)
+  const { getFilterTuggle, getSortTuggle, changeFilterItem, changeSortItem } = useActions()
+  const { filterState, sortState, filterItem, sortItem, status } = useSelector(selectBook)
 
   return (
     <div className='searchFields'>
       <SearchField />
       <div className='searchFields__container'>
  
-        <Filter func={getFilterTuggle}>
-          <PopUpFilter category={["all", "art", "biography", "computers", "history", "medical", "poerty"]} flag={filterState} />
+        <Filter func={getFilterTuggle} flag={filterState} label={"cathegory"} item={filterItem}>
+          <PopUpFilter category={filterItems} flag={filterState} item={filterItem} func={changeFilterItem} />
         </Filter>
 
-        <Filter func={getSortTuggle}>
-          <PopUpFilter category={["relevance ", "newest"]} flag={sortState} />
+        <Filter func={getSortTuggle} flag={sortState} label={"sort"} item={sortItem}>
+          <PopUpFilter category={sortItems} flag={sortState} item={sortItem} func={changeSortItem} />
         </Filter>
- 
-        <Result />
+
+        {
+          status && <Result />
+        }
+        
       </div>
     </div>
   );
