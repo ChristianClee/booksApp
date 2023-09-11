@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
-// import {filterForFetching} from "../../components/utilits/utilits"
 import { type BookState, itemsT} from "../types"
 import {
   LOADING,
@@ -171,9 +170,6 @@ export const bookSlice = createSlice({
       } else {
         state.books =  { amount: state.books.items.length , items: state.books.items }
       }
-      
-      
-
     })
     .addCase(pagination.rejected, (state, action) => {
         state.status = ERROR

@@ -19,7 +19,6 @@ const App: React.FC = () => {
         <Route path="/book" element={ <ItemPage/> } />
         <Route path="*" element={<span>not found</span>} />
       </Routes>
-      
     </div>
   );
 }

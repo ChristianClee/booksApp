@@ -33,7 +33,6 @@ const LittleBookItem: React.FC<LittleBookItemT> = ({ img, title, cathegory, auth
       <Link to="/book" state={{ from: item }}
         className='littleBookItem__box'
         ref={paddingRef}
-      // onClick={() => console.log(item)}
      
 
       >

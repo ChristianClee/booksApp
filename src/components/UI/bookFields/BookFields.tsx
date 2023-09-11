@@ -33,12 +33,8 @@ const BookFields: React.FC = () => {
       </div>
       {
         books.amount > books.items.length ?
-          <div
-            className='loadding'
-            onClick={() => pagination({ inputData: inputData, sort: sortItem.value, count: String(books.items.length) })}
-          >
-            load more
-          </div> :
+          <LoadMore/>
+          :
           null
       }
     </>
@@ -46,6 +42,25 @@ const BookFields: React.FC = () => {
   );
 }
 export default BookFields;
+
+
+
+
+
+
+const LoadMore: React.FC = () => {
+  const { books, inputData, sortItem, } = useSelector(selectBook)
+  const { pagination } = useActions()
+  
+  return (     
+        <div
+          className='loadding'
+          onClick={() => pagination({ inputData: inputData, sort: sortItem.value, count: String(books.items.length) })}
+        >
+          load more
+        </div>
+  );
+}
 
 
 const Skelets: React.FC = () => {
@@ -75,23 +90,7 @@ const ErrorMessage: React.FC = () => {
 
 const Books: React.FC = () => {
   const { books, filterItem } = useSelector(selectBook)
-  console.log(books)
   const filteredBooks = filterFunc(books.items, filterItem.value )
-  // const filteredBooks = books.items.filter(book => {
-  //   const categories = book.volumeInfo?.categories
-    
-  //   if (filterItem.value === "") return true
-    
-  //   if (!categories) return false
-  //   if (categories.length === 0) return false
-  //   const newCategories = categories
-  //     .join(" ")
-  //     .toLocaleLowerCase()
-  //     .split(" ")
-  //   const result = newCategories.filter(elem => filterItem.value === elem)
-  //   if (result.length > 0) return true
-  // })
-
 
   return (
     <>

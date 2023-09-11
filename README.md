@@ -1,46 +1,85 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+задача реализованна следующим способои (общее):
 
-## Available Scripts
+1. Использован "react-router-dom" для постраничного вывода рендера, всего использованно две страници: path="/"  - это главная страница с инпутом, сортировками и загрузкой данных
+ path="/book" - для просмотра выбранного компонента
 
-In the project directory, you can run:
+2. В качестве стейта стостояния использован redux toolkit который написан стандартно, как пример (был использован Quick Start из документации Redux Toolkit) за исключением нескольких моментов
+@1 в файле bookSlice.ts к стандартному слайсу добавленн createAsyncThunk для ассинхронной загрузки данных
+@2 в файле bookSlice.ts к функции createSlice добавленны extraReducers которые обрабатывают данные на наличее ошибки с сервера, а так же времени загрузки данных
+@3 в файле reduxHooks.ts  написанна функция useActions() которая упрощает dispatch, представим что в bookSlice.ts имеется какой то reducer с названием "redusrtFunc", что бы его вызвать нужно  в компоненте написать следующее: const {redusrtFunc} = useActions(), далее можно вызывать redusrtFunc()
+@4 вызов initialState из redux реализован следующим образом: вначале в файле создается функция selectBook в которой хранися  initialState, затем эта функция экспротрируеся и в компоненте нужные поля из initialState извлекаются при помощи useSelector. const {milk, meat} = useSelector(selectBook)
 
-### `npm start`
+3. Ассинхронные запросы  реализованна в Redux при помощи createAsyncThunk ошибки обрабатываюся в extraReducers (в Redux) 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4. при загрузке данных, что бы показать что данные загружаются вместо простого spiner используется react-content-loader( мерцающие квадратики примерно такие же как на youtube  при загрузке) 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Файловая структура: в папке src находятся главный вайл index.tsx в котором <App /> обёрнут в HashRouter вместо BrowserRouter это сделанно чтолько для того что бы приложение корректно отображалось на gitHub
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. в App.tsx находится роутинг состоящий главным образом из двух путей это гавная страница и страница для выбранной книги
+первой загрузится конечно же главная path="/" на страницу с path="/book" можно попасть только при клике на книгу при условии что она отобразится на экране
 
-### `npm run eject`
+в App.tsx находится useClosePopUpByScroll() - его задача закрывать выдвигающееся меню сортировки и фильтрации при скроле
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. в Main.tsx находятся два блока, один с className='App__fixedPositionField' и BookFields. 'App__fixedPositionField' - это неподвижный элемент в котором находися инпут, сортировка и фильтрация. BookFields это контейнер для результата поиска книг, в котором отображаются книги а так же ошибки
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+в Main.tsx находится checkClosestParant() -его задача закрывать выдвигающееся меню сортировки и фильтрации при клике на любую зону экрана за исключением выбранных зон(в которую входят сортировка и фильтрация)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+3. В 'App__fixedPositionField' в SearchFields находятся  фильтр и сортировка и колличкство найденных элементов. фильтр и сортировка представляют собой елемент <Filter> которы принимает пропсы,конкретный набор пропсов определяет чем будет являться  Filter. так же Filter принимает children <PopUpFilter>. PopUpFilter - является выдвигающимся меню для сотрировки или фильтрации
 
-## Learn More
+4. один из пропсов PopUpFilter это category, category это массив из обьектов каждый обьект имент поле с именем и значением,
+имя нужно для отображения типа фильтрации а значение применяется для асинхронных запросов
+в переменную sortCathegory попадают элеменны имена которых не совпадают с выбранными, таким образом если выбрать категорию "all" она не отобразится в выдвигающемся меню сортировки
+в PopUpFilter другой из пропсов это func(), func() меняет значение фильтрации или сортировки при клике на выбранное имя в выдвижном меню
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. SearchField это поле инпута и кнопка отправления. Запрос отправляется при нажатии на Enter или клике на кнопку
+fetchUserById() это функция отправляющая запрос. Аргументом функция принимает обьект состоящий из значения сортировки и данных ввода
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+6. BookFields это компонент в котором отображаются найденные книги и ошибки. Он состоит из:
+<Skelets /> - отображаются при загрузке
+<ErrorMessage /> - отображается при ошибке сервера
+<div className='BookFields__greeting'> Enter value </div> - стартовое состояние
+<Books /> - отоброжается если ошибок сервера нет и запрос был.
+<LoadMore> - отоброжается если колличество найденных элементов больше чем колличество отрендеренных
+
+7. Books это компонент в котором отображаются найденные книги. Он состоит из:
+переменной filteredBooks, в которой отображаются отфильтрованные переменные удовлетворяющие результату поиска по категории
+
+<NoBooks /> - отобразится если результат поиска равен нулю
+filteredBooks.map отообазит найденные книги
+
+
+8. LittleBookItem это компонент в котором отображаются информация о книге. Он состоит из:
+className='littleBookItem' это ограничиваюший контейнер имеющий строгие размеры
+<Link> это контейнер в информацией о книге, он не имеет строгой высоты и его высота определяется динамическим заполнением
+
+если высота <Link> выходит из контейнера className='littleBookItem' то показывается компонент <ShowMore>
+useIsContaiterOver() это функция которая определяет нужно ли рендерить <ShowMore> или нет
+
+9. <Link> - это ещё и ссылка на страницу to="/book", описанную выше.
+Link передает props item в котором хранится вся информация о книге
+Link состоит из:
+<Image> - картинка
+<Title> - название
+<Author> - авторы
+<Cathegory> - категория
+
+если какой то информации нет картинки или автора, то вместо них выводится "значёк" нет картинки или "название" нет автора
+
+10. если вы дошли до десятой главы вы большой молодец. Глядя на колличество откликов на вашу вакансию (более 1000) у меня разыгрывается чувство, что вы уже успели кого то найти на вакансию и я хочу вам сказать если у вас возникнет интерес к моей кандидатуре и вам нужны более подробные комментарии, дайте мне знать я вышлю  более подробно заробранный код
+
+
+
+
+
+
+
+

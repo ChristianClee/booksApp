@@ -17,8 +17,8 @@ const SearchFields: React.FC = () => {
 
   return (
     <div className='searchFields'>
-      <SearchField />
-      <div className='searchFields__container'>
+      <SearchField />                                {/* инпут с кнопкой*/}
+      <div className='searchFields__container'>     {/* сортировка фильтр и колличество найденных элементов*/}
  
         <Filter func={getFilterTuggle} flag={filterState} label={"cathegory"} item={filterItem}>
           <PopUpFilter category={filterItems} flag={filterState} item={filterItem} func={changeFilterItem} />
