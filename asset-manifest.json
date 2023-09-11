@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/booksApp/static/css/main.184cc8a2.css",
+    "main.js": "/booksApp/static/js/main.f911c709.js",
+    "static/media/noPhoto.svg": "/booksApp/static/media/noPhoto.8cf6b141bbaebee9409eb49daa6d3257.svg",
+    "static/media/noBooks.svg": "/booksApp/static/media/noBooks.6570688a934c20e726377db9d8e01ab8.svg",
+    "static/media/back.svg": "/booksApp/static/media/back.9481b4fcdf389edb9e9d466eb10bcc99.svg",
+    "static/media/error.svg": "/booksApp/static/media/error.d750c72587e39e440ce7f006f5984b44.svg",
+    "static/media/arrow.svg": "/booksApp/static/media/arrow.2f689cb366230702b1042e2ab40a8c83.svg",
+    "index.html": "/booksApp/index.html",
+    "main.184cc8a2.css.map": "/booksApp/static/css/main.184cc8a2.css.map",
+    "main.f911c709.js.map": "/booksApp/static/js/main.f911c709.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.184cc8a2.css",
+    "static/js/main.f911c709.js"
+  ]
+}
