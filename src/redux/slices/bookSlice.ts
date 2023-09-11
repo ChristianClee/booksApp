@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
-import {filterForFetching} from "../../components/utilits/utilits"
+// import {filterForFetching} from "../../components/utilits/utilits"
 import { type BookState, itemsT} from "../types"
 import {
   LOADING,
@@ -20,12 +20,12 @@ import {
 
 export const fetchUserById = createAsyncThunk(
   'book/fetchByIdStatus',
-  async (params: { inputData: string, sort: string, filter: string }, state) => {
-    let { inputData, sort, filter } = params
+  async (params: { inputData: string, sort: string }) => {
+    let { inputData, sort } = params
     inputData = inputData.trim()
     let get: string
     
-    if (inputData === "") return { amount: 0, items: empryBooksStore }
+    if (inputData === "") return empryBooksStore
  
     
     get = `https://www.googleapis.com/books/v1/volumes?q=${inputData}&orderBy=${sort}&maxResults=${maxElements}&key=${key}`
@@ -55,6 +55,7 @@ export const pagination = createAsyncThunk(
     
     const response = await fetch(get).then(res => res.json())
     const result: itemsT[] = response.items
+    console.log(response)
     if(response.totalItems === 0) return []
     return result
   }
@@ -121,6 +122,7 @@ export const bookSlice = createSlice({
     changeSortItem: (state, active: PayloadAction<{name: string, value: string}>) => {
       state.sortItem = active.payload
     },
+    
     //=========================sort and filter actions==========================================
 
 
@@ -164,8 +166,14 @@ export const bookSlice = createSlice({
     .addCase(pagination.fulfilled, (state, action) => {
       state.status = SUCCESS
       const newData = action.payload
-      state.books =  { amount: state.books.amount, items: [...state.books.items, ...newData] }
-      console.log(state.books)
+      if (newData) {
+        state.books =  { amount: state.books.amount, items: [...state.books.items, ...newData] }
+      } else {
+        state.books =  { amount: state.books.items.length , items: state.books.items }
+      }
+      
+      
+
     })
     .addCase(pagination.rejected, (state, action) => {
         state.status = ERROR
@@ -175,7 +183,6 @@ export const bookSlice = createSlice({
         }
     })
     //========================= pagination ====================================================
-
     }
 })
 

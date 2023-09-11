@@ -3,6 +3,7 @@ import "./style.css"
 import { ReactComponent as NoPicture } from "../../assets/images/noPhoto.svg"
 import { useIsContaiterOver } from '../../customHooks/customHooks';
 import { itemsT } from "../../../redux/types"
+import {Link} from "react-router-dom"
 
 type LittleBookItemT = {
   item: itemsT
@@ -15,7 +16,7 @@ type LittleBookItemT = {
 
 const LittleBookItem: React.FC<LittleBookItemT> = ({ img, title, cathegory, authors, item }) => {
   const mainRef = useRef<HTMLDivElement>(null)
-  const paddingRef = useRef<HTMLDivElement>(null)
+  const paddingRef = useRef<HTMLAnchorElement>(null)
 
   const [showMore, setShowMore] = useState(false)
 
@@ -28,17 +29,19 @@ const LittleBookItem: React.FC<LittleBookItemT> = ({ img, title, cathegory, auth
       ref={mainRef}
 
     >
-      <div
+      
+      <Link to="/book" state={{ from: item }}
         className='littleBookItem__box'
         ref={paddingRef}
       // onClick={() => console.log(item)}
+     
 
       >
         <Image img={img} />
         <Title title={title} />
         <Author authors={authors} />
         <Cathegory cathegory={cathegory} />
-      </div>
+      </Link>
       <ShowMore showMore={showMore} />
     </div>
 

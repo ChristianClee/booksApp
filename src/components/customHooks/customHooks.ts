@@ -6,7 +6,7 @@ import { selectBook } from "../../redux/slices/bookSlice"
 type saveClassT = (elem: React.RefObject<HTMLHeadingElement>)=> void
 type IsContaiterOverT = (
   mainRef: React.RefObject<HTMLDivElement>,
-  paddingRef: React.RefObject<HTMLDivElement>,
+  paddingRef: React.RefObject<HTMLAnchorElement>,
   img: string | undefined,
   title: string | undefined,
   setShowMore: (arg: boolean)=>void

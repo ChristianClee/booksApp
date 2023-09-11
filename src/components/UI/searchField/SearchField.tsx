@@ -3,7 +3,7 @@ import "./style.css"
 import { useSelector } from "react-redux"
 import { useActions } from "../../../redux/reduxHooks"
 import { selectBook } from "../../../redux/slices/bookSlice"
-import { fetching } from "../../utilits/utilits"
+
 
 
 const SearchField: React.FC = () => {
@@ -18,7 +18,7 @@ const SearchField: React.FC = () => {
         className='searchField__input'
         type="text" required
         onKeyDownCapture={(e) => {
-          if (e.nativeEvent.key === "Enter") fetching(sortItem, filterItem, inputData,fetchUserById)
+          if (e.nativeEvent.key === "Enter") fetchUserById({ sort: sortItem.value, inputData })
         }}
         value={inputData}
         onChange={(event) => { changeInputData(event.target.value) }}
@@ -26,7 +26,7 @@ const SearchField: React.FC = () => {
       <label>search</label>
       <button
         className='searchField__button'
-        onClick={() => fetching(sortItem, filterItem, inputData, fetchUserById)}
+        onClick={() => fetchUserById({ sort: sortItem.value, inputData })}
       >
         start
       </button>

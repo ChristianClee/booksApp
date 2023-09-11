@@ -1,36 +1,43 @@
 import React from 'react';
 import './normolize.css'
 import './App.css';
-import SearchFields from "./components/UI/searchFields/SearchFields"
-import BookFields from './components/UI/bookFields/BookFields';
-import {useActions} from "./redux/reduxHooks"
-import { useSelector } from 'react-redux';
-import { selectBook } from "./redux/slices/bookSlice"
-import { checkClosestParant } from "./components/utilits/utilits"
+import Main from './components/UI/main/Main';
+import ItemPage from './components/UI/itemPage/ItemPage';
 import { useClosePopUpByScroll } from "./components/customHooks/customHooks"
+import { Routes, Route, Link } from 'react-router-dom'
+
 
 
 const App: React.FC = () => {
-  const { closePopUpFilter: dispatch} = useActions()
-  const { exceptClassNames: list } = useSelector(selectBook)
-
   useClosePopUpByScroll()
 
 
   return (
-    <div
-      className="App"
-      onClick={(event) => {
-        checkClosestParant(event, list, dispatch)
-      }}
-
-    >
-      <div className='App__fixedPositionField'>
-        <SearchFields />
-      </div>
-      <BookFields/>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Main/>}/>
+        <Route path="/book" element={ <ItemPage/> } />
+        <Route path="*" element={<span>not found</span>} />
+      </Routes>
+      
     </div>
   );
 }
 
 export default App;
+
+
+
+
+// const Page: React.FC = () => {
+//   // @ts-ignore
+//   const location = useLocation()
+//   const { from } = location.state
+//   console.log("from", from)
+//   return (
+//     <div>
+      
+      
+//     </div>
+//   );
+// }

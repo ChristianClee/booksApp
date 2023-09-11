@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./style.css";
 import LittleBookItem from '../littleBookItem/LittleBookItem';
 import { useSelector } from "react-redux"
@@ -7,35 +7,35 @@ import Skeleton from '../skeleton/Skeleton';
 import { ERROR, LOADING } from "../../../redux/viriabls"
 import { ReactComponent as ErrorIcon } from "../../assets/images/error.svg"
 import { ReactComponent as NoBookIcon } from "../../assets/images/noBooks.svg"
-import {useActions} from "../../../redux/reduxHooks"
+import { useActions } from "../../../redux/reduxHooks"
+import {filterFunc} from "../../utilits/utilits"
 
 const BookFields: React.FC = () => {
-  const { status, books, inputData, sortItem } = useSelector(selectBook)
+  const { status, books, inputData, sortItem, } = useSelector(selectBook)
   const { pagination } = useActions()
 
-  // console.log(books)
+
   return (
     <>
       <div className='BookFields'>
         {
           status === LOADING ?
-            <Skelets />
+          <Skelets />
             :
-            status === ERROR ?
-              <ErrorMessage />
-              :
-              !status ?
-                <div className='BookFields__greeting'> Enter value </div>
-                :
-                <Books />
+          status === ERROR ?
+            <ErrorMessage />
+            :
+          !status ?
+          <div className='BookFields__greeting'> Enter value </div>
+            :
+          <Books />
         }
       </div>
       {
         books.amount > books.items.length ?
           <div
             className='loadding'
-            onClick={() => pagination({ inputData: inputData, sort: sortItem.value, count: String(books.items.length) }) }
-            // onClick={() => console.log("aasad asd")}
+            onClick={() => pagination({ inputData: inputData, sort: sortItem.value, count: String(books.items.length) })}
           >
             load more
           </div> :
@@ -74,17 +74,33 @@ const ErrorMessage: React.FC = () => {
 }
 
 const Books: React.FC = () => {
-  const { books } = useSelector(selectBook)
-  // console.log(filterItem)
+  const { books, filterItem } = useSelector(selectBook)
+  console.log(books)
+  const filteredBooks = filterFunc(books.items, filterItem.value )
+  // const filteredBooks = books.items.filter(book => {
+  //   const categories = book.volumeInfo?.categories
+    
+  //   if (filterItem.value === "") return true
+    
+  //   if (!categories) return false
+  //   if (categories.length === 0) return false
+  //   const newCategories = categories
+  //     .join(" ")
+  //     .toLocaleLowerCase()
+  //     .split(" ")
+  //   const result = newCategories.filter(elem => filterItem.value === elem)
+  //   if (result.length > 0) return true
+  // })
+
 
   return (
     <>
       {
-        books.amount === 0
+        filteredBooks.length === 0
           ?
           <NoBooks />
           :
-          books.items.map((item, index: number) => {
+          filteredBooks.map((item, index: number) => {
             const title = item.volumeInfo?.title
             const author = item.volumeInfo?.authors
             const categories = item.volumeInfo?.categories
